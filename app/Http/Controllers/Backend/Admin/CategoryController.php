@@ -13,7 +13,7 @@ class CategoryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        //
+        return view('backend.pages.categories.index');
     }
 
     /**
@@ -22,7 +22,7 @@ class CategoryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        //
+        return view('backend.pages.categories.form');
     }
 
     /**
@@ -32,7 +32,11 @@ class CategoryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        //
+        $request->validate([
+            'category_name'   => ['required', 'string', 'max:80', 'unique:categories,name'],
+            'categories_icon' => ['required', 'image', 'mimes:jpg,png,svg'],
+            'status'          => ['required', 'in:0,1'],
+        ]);
     }
 
     /**
