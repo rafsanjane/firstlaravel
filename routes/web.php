@@ -24,5 +24,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     //---------------- Dashboard ---------------//
     Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
     //---------------- Category -----------------//
-    Route::resource('categories', CategoryController::class);
+    Route::resource('categories', CategoryController::class)
+        ->except(['destroy']);
+
+    Route::get('categories/{id}', [CategoryController::class, 'destroy'])
+        ->name('categories.delete');
+
 });

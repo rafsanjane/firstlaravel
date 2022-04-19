@@ -29,8 +29,6 @@
                         </thead>
                         <tbody class="table-border-bottom-0">
                             @forelse ($category as $key =>$value)
-
-
                             <tr>
                                 <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{$key+1}}</strong>
                                 </td>
@@ -48,14 +46,17 @@
                                                 href="{{ route('admin.categories.edit',$value->id)}}"><i
                                                     class="bx bx-edit-alt me-1"></i> Edit</a>
                                             <a class="dropdown-item"
-                                                href="{{ route('admin.categories.destroy',$value->id)}}"><i
+                                                href="{{ route('admin.categories.delete',$value->id)}}"><i
                                                     class="bx bx-trash me-1"></i> Delete</a>
+
                                         </div>
                                     </div>
                                 </td>
                             </tr>
                             @empty
-
+                            <tr>
+                                <td colspan="5" class="text-danger text-center">No Data Found</td>
+                            </tr>
                             @endforelse
                         </tbody>
                     </table>
