@@ -19,6 +19,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/docs', function () {
+    $collection = collect(['John Doe', 'Jane Doe']);
+    $datas = $collection->dd();
+    return view('docs', compact($datas));
+});
+
 //================== Admin Route Group =================//
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     //---------------- Dashboard ---------------//
