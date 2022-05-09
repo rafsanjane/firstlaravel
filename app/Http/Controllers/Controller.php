@@ -13,4 +13,8 @@ class Controller extends BaseController {
     public function imageUpload($file, $folder) {
 
     }
+
+    public function SetPageTitle($title) {
+        view()->share(['title' => $title]);
+    }
 }

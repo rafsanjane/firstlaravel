@@ -12,9 +12,9 @@
             <div class="card">
                 <h4 class="fw-bold pt-3  px-3 d-flex justify-content-between align-items-center">
                     @isset($category)
-                    {{ $category->name }} -Edit
+                    {{ $category->name }} - {{ $title }}
                     @else
-                    New Category Add
+                    {{ $title }}
                     @endisset
                     <a href="{{ route('admin.categories.index')}}" class="btn btn-sm btn-danger px-5 py-2">BACK</a>
                 </h4>
@@ -28,35 +28,18 @@
                         @method('PUT')
                         <input type="hidden" name="update_id" value="{{ $category->id }}">
                         @endisset
-                        <div class="mb-3">
-                            <label for="category-name" class="form-label">Category Name</label>
-                            <input type="text" class="form-control form-control" name="category_name" id="category-name"
-                                placeholder="Example: Electronics" value="{{ $category->name ?? old('category_name')}}">
-                            @error('category_name')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="category-icon" class="form-label">Category Icon</label>
-                            <input type="file" class="form-control form-control" name="categories_icon"
-                                id="category-icon">
-                            @error('categories_icon')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="category-status" class="form-label">Category Status</label>
-                            <select class="form-select  form-control" name="status" id="category-status">
+
+                        <x-textbox name="category_name" labelname="Category Name" errorName="category_name" value="{{ $category->name ?? old('category_name')}}" />
+
+                        <x-textbox type="file" name="categories_icon" labelname="Category Icon" errorName="categories_icon" />
+
+                        <x-selectbox type="file" name="status" labelname="Status" errorName="status">
                                 <option selected>Select Status</option>
-                                <option value="0" @isset($category) {{ $category->status==0 ? 'selected' : ""}}
-                                    @endisset>Pending</option>
-                                <option value="1" @isset($category) {{ $category->status==1 ? 'selected' : ""}}
-                                    @endisset>Publish</option>
-                            </select>
-                            @error('status')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
+                                @foreach (STATUS as $key=>$value)
+                                <option value="{{$key}}" @isset($category) {{ $category->status==$key  ? 'selected' : ""}}
+                                    @endisset>{{$value}}</option>
+                                @endforeach
+                        </x-selectbox>
                         <button type="submit" class="btn btn-primary btn-sm px-5 py-2">Create</button>
                     </form>
                 </div>

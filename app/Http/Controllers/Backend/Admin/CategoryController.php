@@ -15,6 +15,7 @@ class CategoryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
+        $this->SetPageTitle('Categories');
         $category = Category::all();
         return view('backend.pages.categories.index', compact('category'));
     }
@@ -25,6 +26,9 @@ class CategoryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
+
+        $this->SetPageTitle('Create New Category');
+
         return view('backend.pages.categories.form');
     }
 
@@ -71,7 +75,7 @@ class CategoryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category) {
-
+        $this->SetPageTitle('Edit');
         return view('backend.pages.categories.form', compact('category'));
     }
 
